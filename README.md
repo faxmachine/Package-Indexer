@@ -1,4 +1,3 @@
-#README
 This is a server that will create a dependency tree and let connected clients modify the same dependency tree concurrently without a race condition.
 
 To use the server, first run `indexer_server.py`. 

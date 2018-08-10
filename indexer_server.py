@@ -16,7 +16,7 @@ class IndexerServer:
 		"""
 
 		self.CONCURRENCY_VALUE = 100
-		regex = "^(ADD|REMOVE|CHECK)[ ][a-zA-z0-9-_+]*[ ][a-zA-z0-9-_+]*([,][a-zA-z0-9-_+]*)*\r?\n$"
+		regex = "^(ADD|REMOVE|CHECK)[ ][a-zA-z0-9-_+]*[ ]*[a-zA-z0-9-_+]*([,][a-zA-z0-9-_+]*)*\r?\n$"
 		self.comp_regex = re.compile(regex)
 		self.lock = threading.Lock()
 
@@ -51,6 +51,10 @@ class IndexerServer:
 
 		message = message.replace("\n", "").replace("\r", "")
 		aux_array = message.split(" ")
+
+		if len(aux_array) == 2:
+			aux_array.append("")
+
 		aux_array[2] = aux_array[2].split(",")
 
 		# This handles the no dependencies case
